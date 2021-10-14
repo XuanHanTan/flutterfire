@@ -108,10 +108,13 @@ public class DatabaseConfiguration {
         warningSent = true;
       }
     } else if (isLocked) {
+      final Map<String, Object> details = new HashMap<>();
+      details.put("nativeStackTrace", Thread.currentThread().getStackTrace());
+
       throw new FlutterFirebaseDatabaseException(
-        Constants.ILLEGAL_CONFIGURATION_POINT,
+        Constants.ILLEGAL_CONFIGURATION_POINT_CODE,
         "Firebase database should be configured before any other usage",
-        new HashMap<>()
+        details
       );
     }
   }

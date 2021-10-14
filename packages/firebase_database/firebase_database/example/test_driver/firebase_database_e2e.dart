@@ -56,6 +56,16 @@ void testsMain() {
     test('setLoggingEnabled to false', () async {
       await database.setLoggingEnabled(false);
     });
+
+    test('throws if called after any other database usage', () async {
+      await prepareData();
+      await database.ref('flutterfire').get();
+
+      expect(
+        () async => await database.setLoggingEnabled(true),
+        throwsA<FirebaseDatabaseException>(),
+      );
+    });
   });
 
   group('DatabaseReference', () {
