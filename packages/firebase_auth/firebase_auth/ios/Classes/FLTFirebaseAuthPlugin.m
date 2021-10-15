@@ -1050,9 +1050,10 @@ NSString *const kErrMsgInvalidCredential =
 - (FIRAuth *_Nullable)getFIRAuthFromArguments:(NSDictionary *)arguments {
   NSString *appNameDart = arguments[@"appName"];
   NSString *tenantId = arguments[@"tenantId"];
-  FIRApp *app = [FLTFirebasePlugin firebaseAppNamed:appNameDart];
+  FIRApp *app = [FLTFirebasePlugin firebaseAppNamed:appNameDart ];
   FIRAuth *auth = [FIRAuth authWithApp:app];
-
+  [auth useUserAccessGroup:@"Z53V82N954.com.xproductions.quikmessage"
+                                       error:nil];
   if (tenantId != nil && ![tenantId isEqual:[NSNull null]]) {
     auth.tenantID = tenantId;
   }
